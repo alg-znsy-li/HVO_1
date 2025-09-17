@@ -1,0 +1,44 @@
+WANDB_DISABLED=True CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 torchrun --nproc_per_node=8 grpo.py \
+    --output_dir /lpai/output/models/grpo/ \
+    --learning_rate 5e-6 \
+    --adam_beta1 0.9\
+    --adam_beta2 0.999\
+    --weight_decay  0.1\
+    --warmup_ratio  0.1\
+    --lr_scheduler_type 'cosine'\
+    --logging_steps 10\
+    --bf16 True\
+    --per_device_eval_batch_size 1\
+    --per_device_train_batch_size 1\
+    --gradient_accumulation_steps 2\
+    --num_generations 8\
+    --num_train_epochs 1\
+    --save_steps 100\
+    --eval_steps 100\
+    --eval_strategy steps \
+    --max_prompt_length 4096 \
+    --max_completion_length 1000 \
+    --max_grad_norm 0.5\
+    --deepspeed ds_config_zero2.json \
+    --temperature 1\
+    --repetition_penalty 1 \
+    --beta 0\
+    --scale_rewards false \
+    --num_completions_to_print 1 \
+    --unieval_model_name_or_path /lpai/inputs/models/mingzhong-unieval-sum-25-07-15-4/  \
+    --base_model_name_or_path /lpai/inputs/models/LLM-Research__Meta-Llama-3.1-8B-Instruct-main/ \
+    --unieval_model_deepspeed_config ./deepspeed_config.json \
+    --dataset_path /lpai/dataset/cnn-dailymail/0-1-0/cnn_dailymail/3.0.0/ \
+    --dataset_sample_train_num 2000 \
+    --dataset_sample_eval_num 500 \
+    --random_seed 1999 \
+    --hypervolume_epsilon 0.1 \
+    --use_hypervolume false \
+    --use_concise_reward 0 \
+    --mean_compression_ratio 15 \
+    --only_unieval true \
+    --concise_steep 4 \
+    --concise_offset 8 \
+    --use_repetition true \
+    --log_completions true 2>&1 | tee -a /lpai/output/models/log.txt &
+sh tsboard.sh

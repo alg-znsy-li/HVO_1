@@ -1,0 +1,39 @@
+WANDB_DISABLED=True CUDA_VISIBLE_DEVICES=3 torchrun --nproc_per_node=1 grpo.py \
+    --output_dir /lpai/output/models/grpo/ \
+    --learning_rate 5e-6 \
+    --adam_beta1 0.9\
+    --adam_beta2 0.99\
+    --weight_decay  0.1\
+    --warmup_ratio  0.1\
+    --lr_scheduler_type 'cosine'\
+    --logging_steps 1\
+    --bf16 True\
+    --per_device_eval_batch_size 2\
+    --per_device_train_batch_size 2\
+    --gradient_accumulation_steps 1\
+    --num_generations 2\
+    --num_train_epochs 1\
+    --save_steps 100\
+    --eval_steps 100\
+    --eval_strategy steps \
+    --max_prompt_length 4000 \
+    --max_completion_length 1000 \
+    --max_grad_norm 1\
+    --deepspeed ds_config_zero2.json \
+    --temperature 1\
+    --beta 0 \
+    --num_completions_to_print 5 \
+    --unieval_model_name_or_path /lpai/volumes/jfs-ppl-alg-disk-bd-ga/unieval_model \
+    --model_name_or_path /lpai/volumes/jfs-ppl-alg-disk-bd-ga/songjunjie/ppl_rank/test_model/asllr_model/Qwen1___5-1___8B \
+    --unieval_model_deepspeed_config ./deepspeed_config.json \
+    --dataset_path /lpai/volumes/jfs-ppl-alg-disk-bd-ga/songjunjie/summary_rd/cnn_dailymail/3.0.0_debug \
+    --dataset_sample_train_num 10000 \
+    --dataset_sample_eval_num 500 \
+    --random_seed 2025 \
+    --hypervolume_epsilon 0.1 \
+    --use_hypervolume true \
+    --use_concise_reward true \
+    --mean_compression_ratio 16 \
+    --only_unieval false \
+    --log_completions true 2>&1 | tee -a log.txt
+    
