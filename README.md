@@ -12,7 +12,7 @@ Text summarization is a crucial task that requires the simultaneous optimization
 The hypervolume method is an evaluation metric in multi-objective optimization that measures the volume of the hypercube occupied by a set of solutions in the objective space. As shown in Figure 2 (c), taking the two-dimensional case as an example, when the weighted linear combination scores of the samples are similar, samples with more balanced dimensions have higher hypervolume values. Moreover, hypervolume-based evaluation has been shown to be a Pareto-consistent evaluation method. we integrate hypervolume evaluation into the multi-dimensional rewards of GRPO and use the commonly adopted approach of selecting a slightly worse reference point than the nadir point. 
 
 ![alt text](image.png)
-![alt text](image-2.png)  
+The entire process of HVO. In subplot (c), the points on the $f_1$ line represent the same linear weighted sum score for $D_1$ and $D_2$, while the points on the $f_2$ line represent the same hypervolume value for $D_1$ and $D_2$.
 ## 🏃‍♂️‍➡️ Quick Start
 ### 📊 Requirements
 - Python 3.10
