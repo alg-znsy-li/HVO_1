@@ -37,6 +37,10 @@ Usage
 ```
 sh run.sh
 ```
+
+## Checkpoint
+huggingface: hvo4ts/cnn-dailymail
+
 ## 🙏 Acknowledgement
 Special thanks to the following repositories for their invaluable code
 Our trainer is partially adapted from [trl](https://github.com/huggingface/trl),and evaluator is from
