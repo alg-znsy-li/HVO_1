@@ -40,6 +40,7 @@ sh run.sh
 
 ## Checkpoint
 huggingface: hvo4ts/cnn-dailymail
+huggingface: hvo4ts/BillSum
 
 ## 🙏 Acknowledgement
 Special thanks to the following repositories for their invaluable code
